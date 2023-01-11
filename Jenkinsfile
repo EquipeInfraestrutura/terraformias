@@ -12,9 +12,11 @@ pipeline {
         stage('Criação ou atualização da infra') {
             environment {
                 bucket = credentials('bucket')
+                key = credentials('key')
+                region = credentials('region')
                 access_key = credentials('access_key')
                 secret_key = credentials('secret_key')
-                key = credentials('key')
+
             }
             steps {
                 
