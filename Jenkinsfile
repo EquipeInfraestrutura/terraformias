@@ -23,7 +23,7 @@ pipeline {
                 
                 script {
                     dir('src') {
-                        sh 'terraform init -migrate-state --backend-config "bucket=${bucket}" --backend-config "key=${key}" --backend-config "region=${region}" --backend-config "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" --backend-config "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" --backend-config "AWS_REGION=${AWS_REGION}"'
+                        sh 'terraform init -migrate-state --backend-config "bucket=${bucket}" --backend-config "key=${key}" --backend-config "region=${region}"'
                         sh 'terraform plan'
                     }
                 }
