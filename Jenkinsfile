@@ -14,15 +14,16 @@ pipeline {
                 bucket = credentials('bucket')
                 key = credentials('key')
                 region = credentials('region')
-                access_key = credentials('access_key')
-                secret_key = credentials('secret_key')
+                AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+                AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+                AWS_REGION = credentials ('AWS_REGION')
 
             }
             steps {
                 
                 script {
                     dir('src') {
-                        sh 'terraform init -migrate-state --backend-config "bucket=${bucket}" --backend-config "key=${key}" --backend-config "region=${region}" --backend-config "access_key=${access_key}" --backend-config "secret_key=${secret_key}"'
+                        sh 'terraform init -migrate-state --backend-config "bucket=${bucket}" --backend-config "key=${key}" --backend-config "region=${region}" --backend-config "AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}" --backend-config "AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}" --backend-config "AWS_REGION=${AWS_REGION}"'
                         sh 'terraform plan'
                     }
                 }
