@@ -9,7 +9,6 @@ terraform {
   }
 }
 
-provider "aws" {
-  
-features {}
+provider "aws" {  
+  features {}
 }
