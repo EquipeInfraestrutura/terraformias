@@ -23,7 +23,7 @@ resource "aws_instance" "windows" {
   subnet_id              = var.public_subnet
 
   tags = {
-    Name = "TFteste Generated EC2"
+    Name = "Labdados-BI-Windows"
   }
 
   root_block_device {
