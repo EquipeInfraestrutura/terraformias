@@ -14,9 +14,9 @@ resource "aws_key_pair" "key_pair" {
   }
 }
 
-# Create a EC2 Instance (Ubuntu 20)
+# Create a EC2 Instance (Windows Server 2022)
 resource "aws_instance" "windows" {
-  instance_type          = "t3.micro" # free instance
+  instance_type          = "m5n.xlarge"
   ami                    = data.aws_ami.windows.id
   key_name               = aws_key_pair.key_pair.id
   vpc_security_group_ids = [var.public_sg]
