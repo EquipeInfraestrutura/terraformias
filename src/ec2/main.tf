@@ -18,6 +18,7 @@ resource "aws_key_pair" "key_pair" {
 resource "aws_instance" "windows" {
   instance_type          = "m5n.xlarge"
   ami                    = data.aws_ami.windows.id
+  iam_instance_profile   = "${aws_iam_instance_profile.ec2_profile.name}"
   key_name               = aws_key_pair.key_pair.id
   vpc_security_group_ids = [var.public_sg]
   subnet_id              = var.public_subnet
