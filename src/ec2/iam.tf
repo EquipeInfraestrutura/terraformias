@@ -1,6 +1,6 @@
 resource "aws_iam_role_policy" "ec2_policy" {
   name = "ec2_policy"
-  role = aws_iam_role.labdados_ec2_role.id
+  role = "${aws_iam_role.labdados_ec2_role.id}"
 
   # Terraform's "jsonencode" function converts a
   # Terraform expression result to valid JSON syntax.
