@@ -16,7 +16,7 @@ resource "aws_key_pair" "key_pair" {
 
 
 resource "aws_iam_role" "ec2_labados_role" {
-  name = "ec2_labados"
+  name = "ec2_labados_role"
   path = "/"
 
   assume_role_policy = jsonencode({
@@ -35,7 +35,7 @@ resource "aws_iam_role" "ec2_labados_role" {
 }
 
 resource "aws_iam_role_policy" "ec2_labdados_policy" {
-  name = "ec2_labdados"
+  name = "ec2_labdados_policy"
   role = aws_iam_role.ec2_labados_role.id
 
   # Terraform's "jsonencode" function converts a
