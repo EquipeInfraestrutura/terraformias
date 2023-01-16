@@ -14,6 +14,51 @@ resource "aws_key_pair" "key_pair" {
   }
 }
 
+resource "aws_iam_role_policy" "ec2_labdados_policy" {
+  name = "ec2_labdados"
+  role = aws_iam_role.ec2_labados.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
+resource "aws_iam_role" "ec2_labados_role" {
+  name = "ec2_labados"
+  path = "/"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = "sts:AssumeRole"
+        Effect = "Allow"
+        Sid    = ""
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+      },
+    ]
+  })
+}
+
+resource "aws_iam_instance_profile" "ec2_labdados_profile" {
+  name = "ec2_labdados"
+  role = aws_iam_role.ec2_labados.name
+}
+
+
 # Create a EC2 Instance (Windows Server 2022)
 resource "aws_instance" "windows" {
   instance_type          = "m5n.xlarge"
