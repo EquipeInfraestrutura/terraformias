@@ -54,7 +54,7 @@ resource "aws_iam_role" "ec2_labados_role" {
 }
 
 resource "aws_iam_instance_profile" "ec2_labdados_profile" {
-  name = "ec2_labdados"
+  name = "ec2_labdados_profile"
   role = aws_iam_role.ec2_labados.name
 }
 
@@ -63,7 +63,7 @@ resource "aws_iam_instance_profile" "ec2_labdados_profile" {
 resource "aws_instance" "windows" {
   instance_type          = "m5n.xlarge"
   ami                    = data.aws_ami.windows.id
-  iam_instance_profile   = aws_iam_instance_profile.ec2_labdados.name
+  iam_instance_profile   = aws_iam_instance_profile.ec2_labdados_profile.name
   key_name               = aws_key_pair.key_pair.id
   vpc_security_group_ids = [var.public_sg]
   subnet_id              = var.public_subnet
