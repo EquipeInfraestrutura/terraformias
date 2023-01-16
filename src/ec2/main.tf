@@ -14,25 +14,6 @@ resource "aws_key_pair" "key_pair" {
   }
 }
 
-resource "aws_iam_role_policy" "ec2_labdados_policy" {
-  name = "ec2_labdados"
-  role = aws_iam_role.ec2_labados.id
-
-  # Terraform's "jsonencode" function converts a
-  # Terraform expression result to valid JSON syntax.
-  policy = jsonencode({
-    Version = "2012-10-17"
-    Statement = [
-      {
-        Action = [
-          "ec2:Describe*",
-        ]
-        Effect   = "Allow"
-        Resource = "*"
-      },
-    ]
-  })
-}
 
 resource "aws_iam_role" "ec2_labados_role" {
   name = "ec2_labados"
@@ -53,9 +34,29 @@ resource "aws_iam_role" "ec2_labados_role" {
   })
 }
 
+resource "aws_iam_role_policy" "ec2_labdados_policy" {
+  name = "ec2_labdados"
+  role = aws_iam_role.ec2_labados_role.id
+
+  # Terraform's "jsonencode" function converts a
+  # Terraform expression result to valid JSON syntax.
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action = [
+          "ec2:Describe*",
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
 resource "aws_iam_instance_profile" "ec2_labdados_profile" {
   name = "ec2_labdados_profile"
-  role = aws_iam_role.ec2_labados.name
+  role = aws_iam_role.ec2_labdados_profile.name
 }
 
 
