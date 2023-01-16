@@ -56,7 +56,7 @@ resource "aws_iam_role_policy" "ec2_labdados_policy" {
 
 resource "aws_iam_instance_profile" "ec2_labdados_profile" {
   name = "ec2_labdados_profile"
-  role = aws_iam_role.ec2_labdados_profile.name
+  role = aws_iam_role.ec2_labados_role.name
 }
 
 
